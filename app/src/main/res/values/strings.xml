@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Review Food</string>
+    <string-array name="arraySpinner">
+        <item>Chưa review</item>
+        <item>Đã review</item>
+    </string-array>
+</resources>

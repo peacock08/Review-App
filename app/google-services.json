@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "49361202101",
+    "project_id": "reviewmonan-51b24",
+    "storage_bucket": "reviewmonan-51b24.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:49361202101:android:e8e219033ee969036f07fc",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "49361202101-hfdoo8v3ciop5u6al6p2r0kaiap3phkl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2FQBx8Fakg4RSRlEHsGuJDIBs7A0pEys"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "49361202101-hfdoo8v3ciop5u6al6p2r0kaiap3phkl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
