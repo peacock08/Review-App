@@ -57,8 +57,8 @@ public class UpdateActivity extends AppCompatActivity {
             radioButton.setText(chuyenNganhs[i].getDescription());
             radioButton.setId(i);
             radioButton.setChecked(khoaHoc.getChuyenNganh()
-                                          .getDescription()
-                                          .equalsIgnoreCase(chuyenNganhs[i].getDescription()));
+                    .getDescription()
+                    .equalsIgnoreCase(chuyenNganhs[i].getDescription()));
 
             chuyenNganhGroup.addView(radioButton);
         }
@@ -124,7 +124,7 @@ public class UpdateActivity extends AppCompatActivity {
                 String ngay = ngayBatDauView.getText().toString();
                 boolean kichHoat = kichHoatBox.isChecked();
                 String chuyenNganhTxt = ((RadioButton) chuyenNganhGroup.findViewById(chuyenNganhGroup.getCheckedRadioButtonId())).getText()
-                                                                                                                  .toString();
+                        .toString();
                 ChuyenNganh chuyenNganh = null;
                 ChuyenNganh[] chuyenNganhs1 = ChuyenNganh.values();
                 for (ChuyenNganh cn : chuyenNganhs1) {

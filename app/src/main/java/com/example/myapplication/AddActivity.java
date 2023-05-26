@@ -104,7 +104,7 @@ public class AddActivity extends AppCompatActivity {
                 String ngay = txtNgay.getText().toString();
                 boolean congtac = congTacCheckBox.isChecked();
                 String chuyenNganhTxt = ((RadioButton) chuyenNganhGroup.findViewById(chuyenNganhGroup.getCheckedRadioButtonId())).getText()
-                                                                                                                  .toString();
+                        .toString();
                 ChuyenNganh chuyenNganh = null;
                 ChuyenNganh[] chuyenNganhs1 = ChuyenNganh.values();
                 for (ChuyenNganh cn : chuyenNganhs1) {
