@@ -79,6 +79,8 @@ public class FragmentSearch extends Fragment implements KhoaHocAdapter.ListItemL
         Button buttonChangeInformation = v.findViewById(R.id.buttonChangeInformation);
         // Khai báo biến currentEmail để lưu trữ email hiện tại
         String currentEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        String currentName = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+        String currentphone = FirebaseAuth.getInstance().getCurrentUser().getPhoneNumber();
         buttonChangeInformation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,8 +101,9 @@ public class FragmentSearch extends Fragment implements KhoaHocAdapter.ListItemL
                 Button buttonCancel = dialogView.findViewById(R.id.buttonCancel1);
                 // Đặt giá trị email hiện tại vào trường email và vô hiệu hóa sửa đổi
                 editTextEmail.setText(currentEmail);
-                editTextEmail.setEnabled(false);
-
+                editTextName.setText(currentName);
+                editTextAge.setText("");
+                editTextPhoneNumber.setText(currentphone);
                 // Tạo dialog từ builder và gán vào biến dialog
                 dialog[0] = builder.create();
 
@@ -108,6 +111,7 @@ public class FragmentSearch extends Fragment implements KhoaHocAdapter.ListItemL
                 buttonUpdate.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+
                         // Lấy thông tin từ các trường nhập
                         String name = editTextName.getText().toString().trim();
                         String age = editTextAge.getText().toString().trim();
@@ -116,6 +120,7 @@ public class FragmentSearch extends Fragment implements KhoaHocAdapter.ListItemL
 
                         // Cập nhật thông tin người dùng trên Firebase (sử dụng các phương thức tương ứng)
                         updateUserInfo(name, age, phoneNumber, email);
+
 
                         // Đóng dialog
                         dialog[0].dismiss();
@@ -183,7 +188,10 @@ public class FragmentSearch extends Fragment implements KhoaHocAdapter.ListItemL
                         }
                     }
                 });
+
     }
+
+
 
 
 
