@@ -66,21 +66,51 @@ public class FragmentInfo extends Fragment {
 
     private List<String> getArticleTitles() {
         List<String> titles = new ArrayList<>();
-        titles.add("Bài báo 1");
-        titles.add("Bài báo 2");
-        titles.add("Bài báo 3");
-        titles.add("Bài báo 4");
-        titles.add("Bài báo 5");
+        titles.add("Review gỏi đu đủ Ty Thy");
+        titles.add("Review quán cơm 10 Khó");
+        titles.add("Top món ăn ngon ở Tây Ninh");
+        titles.add("Món ăn hà Nội vừa rẻ lại vừa bổ dưỡng");
+        titles.add("Top 20 quán ăn ngon ở Thái Bình");
+        titles.add("Review món bánh xèo thịt nướng - Hương vị thơm ngon đậm đà");
+        titles.add("Review món phở gà - Một món ngon truyền thống của Việt Nam");
+        titles.add("Những món ăn vỉa hè ngon và độc đáo");
+        titles.add("Khám phá hương vị ẩm thực đặc biệt");
+        titles.add(" Điểm đến lý tưởng cho tiệc cuối tuần");
+        titles.add("Review gỏi đu đủ Ty Thy");
+        titles.add("Review quán cơm 10 Khó");
+        titles.add("Top món ăn ngon ở Tây Ninh");
+        titles.add("Món ăn hà Nội vừa rẻ lại vừa bổ dưỡng");
+        titles.add("Top 20 quán ăn ngon ở Thái Bình");
+        titles.add("Review gỏi đu đủ Ty Thy");
+        titles.add("Review quán cơm 10 Khó");
+        titles.add("Top món ăn ngon ở Tây Ninh");
+        titles.add("Món ăn hà Nội vừa rẻ lại vừa bổ dưỡng");
+        titles.add("Top 20 quán ăn ngon ở Thái Bình");
         return titles;
     }
 
     private List<String> getArticleUrls() {
         List<String> urls = new ArrayList<>();
-        urls.add("https://www.example.com/article-1");
-        urls.add("https://www.example.com/article-2");
-        urls.add("https://www.example.com/article-3");
-        urls.add("https://www.example.com/article-4");
-        urls.add("https://www.example.com/article-5");
+        urls.add("https://reviewphongtap.com/review-goi-du-du-ty-thy/");
+        urls.add("https://tunaucom123.com.vn/review-quan-com-muoi-kho-co-ngon-khong-1148.html");
+        urls.add("https://diachiamthuc.vn/mon-ngon-tay-ninh/");
+        urls.add("https://www.luavietours.com/review-25-mon-an-ha-noi-vua-re-lai-vua-no-news709.html");
+        urls.add("https://kenhhomestay.com/quan-an-ngon-thai-binh/");
+        urls.add("https://reviewphongtap.com/review-goi-du-du-ty-thy/");
+        urls.add("https://tunaucom123.com.vn/review-quan-com-muoi-kho-co-ngon-khong-1148.html");
+        urls.add("https://diachiamthuc.vn/mon-ngon-tay-ninh/");
+        urls.add("https://www.luavietours.com/review-25-mon-an-ha-noi-vua-re-lai-vua-no-news709.html");
+        urls.add("https://kenhhomestay.com/quan-an-ngon-thai-binh/");
+        urls.add("https://reviewphongtap.com/review-goi-du-du-ty-thy/");
+        urls.add("https://tunaucom123.com.vn/review-quan-com-muoi-kho-co-ngon-khong-1148.html");
+        urls.add("https://diachiamthuc.vn/mon-ngon-tay-ninh/");
+        urls.add("https://www.luavietours.com/review-25-mon-an-ha-noi-vua-re-lai-vua-no-news709.html");
+        urls.add("https://kenhhomestay.com/quan-an-ngon-thai-binh/");
+        urls.add("https://reviewphongtap.com/review-goi-du-du-ty-thy/");
+        urls.add("https://tunaucom123.com.vn/review-quan-com-muoi-kho-co-ngon-khong-1148.html");
+        urls.add("https://diachiamthuc.vn/mon-ngon-tay-ninh/");
+        urls.add("https://www.luavietours.com/review-25-mon-an-ha-noi-vua-re-lai-vua-no-news709.html");
+        urls.add("https://kenhhomestay.com/quan-an-ngon-thai-binh/");
         return urls;
     }
 
@@ -91,7 +121,7 @@ public class FragmentInfo extends Fragment {
 
     private void openMapWithMyLocation() {
         // Sử dụng Intent để mở ứng dụng Bản đồ
-        Uri geoLocation = Uri.parse("geo:0,0?q=your+location");
+        Uri geoLocation = Uri.parse("geo:0,0?q=restaurant");
         Intent intent = new Intent(Intent.ACTION_VIEW, geoLocation);
         if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
             startActivity(intent);

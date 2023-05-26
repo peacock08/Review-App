@@ -89,7 +89,7 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Chuyên ngành:" />
+                android:text="Loại đồ ăn:" />
 
             <RadioGroup
                 android:id="@+id/update_chuyenNganh_group"
@@ -127,7 +127,7 @@
                 android:id="@+id/textView8"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="Học phí:" />
+                android:text="Rating:" />
 
             <EditText
                 android:id="@+id/update_hocPhi"

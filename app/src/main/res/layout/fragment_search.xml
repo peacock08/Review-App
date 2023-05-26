@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     android:background="#F44782">
 
+
+
     <SearchView
         android:id="@+id/search_searchView"
         android:layout_width="0dp"
@@ -64,5 +66,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:entries="@array/arraySpinner" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

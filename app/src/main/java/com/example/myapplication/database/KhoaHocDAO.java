@@ -26,8 +26,8 @@ public class KhoaHocDAO extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String sql = "CREATE TABLE " + TABLE_NAME
-                     + "(id integer primary key autoincrement, ten text, "
-                     + "chuyenNganh text, ngayBatDau date, hocPhi text, kichHoat int)";
+                + "(id integer primary key autoincrement, ten text, "
+                + "chuyenNganh text, ngayBatDau date, hocPhi text, kichHoat int)";
         db.execSQL(sql);
     }
 
@@ -38,15 +38,15 @@ public class KhoaHocDAO extends SQLiteOpenHelper {
 
     public void insert(KhoaHoc khoaHoc) {
         String sql = "INSERT INTO " + TABLE_NAME
-                     + "(ten, chuyenNganh, ngayBatDau, hocPhi, kichHoat) "
-                     + "VALUES(?, ?, ?, ?, ?)";
+                + "(ten, chuyenNganh, ngayBatDau, hocPhi, kichHoat) "
+                + "VALUES(?, ?, ?, ?, ?)";
         String[] args = {
                 khoaHoc.getTen(),
                 khoaHoc.getChuyenNganh().name(),
                 khoaHoc.getNgayBatDau(),
                 khoaHoc.getHocPhi(),
                 Integer.toString(khoaHoc.getKichHoat()),
-                };
+        };
 
         SQLiteDatabase st = getWritableDatabase();
         st.execSQL(sql, args);

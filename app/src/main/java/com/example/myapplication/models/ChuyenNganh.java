@@ -2,7 +2,7 @@ package com.example.myapplication.models;
 
 public enum ChuyenNganh {
     CNTT("Đồ ăn Hàn Quốc"),
-    KT("ĐỒ ăn Việt Nam"),
+    KT("Đồ ăn Việt Nam"),
     TKDH("Đồ ăn Thái Lan"),
     QTKD("Đồ ăn Tây Ban Nha");
 

@@ -32,7 +32,6 @@ public class FragmentSearch extends Fragment implements KhoaHocAdapter.ListItemL
     List<KhoaHoc> khoaHocs = new ArrayList<>();
     KhoaHocDAO db;
     KhoaHocAdapter adapter;
-
     @SuppressLint("MissingInflatedId")
     @Nullable
     @Override
@@ -51,6 +50,7 @@ public class FragmentSearch extends Fragment implements KhoaHocAdapter.ListItemL
         adapter = new KhoaHocAdapter(getContext(), khoaHocs);
         adapter.setListItemListener(this);
         listView.setAdapter(adapter);
+
 
         // Search Button
         searchButton.setOnClickListener(new View.OnClickListener() {
