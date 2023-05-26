@@ -1,17 +1,19 @@
 package com.example.myapplication.fragment;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Spinner;
-
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -21,6 +23,11 @@ import com.example.myapplication.UpdateActivity;
 import com.example.myapplication.adapter.KhoaHocAdapter;
 import com.example.myapplication.database.MonAnDAO;
 import com.example.myapplication.models.MonAn;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,6 +74,67 @@ public class FragmentSearch extends Fragment implements KhoaHocAdapter.ListItemL
                 changeAvatar();
             }
         });
+        // Khai báo biến final dialog
+        final AlertDialog[] dialog = {null};
+        Button buttonChangeInformation = v.findViewById(R.id.buttonChangeInformation);
+        // Khai báo biến currentEmail để lưu trữ email hiện tại
+        String currentEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+        buttonChangeInformation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Tạo dialog bằng cách sử dụng AlertDialog.Builder
+                AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+                LayoutInflater inflater = requireActivity().getLayoutInflater();
+
+                // Inflate layout và thiết lập giao diện cho dialog
+                View dialogView = inflater.inflate(R.layout.fragment_change_information, null);
+                builder.setView(dialogView);
+
+                // Khởi tạo các thành phần trong dialogView
+                EditText editTextName = dialogView.findViewById(R.id.editTextName1);
+                EditText editTextAge = dialogView.findViewById(R.id.editTextAge1);
+                EditText editTextPhoneNumber = dialogView.findViewById(R.id.editTextPhoneNumber1);
+                EditText editTextEmail = dialogView.findViewById(R.id.editTextEmail1);
+                Button buttonUpdate = dialogView.findViewById(R.id.buttonUpdate1);
+                Button buttonCancel = dialogView.findViewById(R.id.buttonCancel1);
+                // Đặt giá trị email hiện tại vào trường email và vô hiệu hóa sửa đổi
+                editTextEmail.setText(currentEmail);
+                editTextEmail.setEnabled(false);
+
+                // Tạo dialog từ builder và gán vào biến dialog
+                dialog[0] = builder.create();
+
+                // Xử lý sự kiện click vào nút "Sửa"
+                buttonUpdate.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // Lấy thông tin từ các trường nhập
+                        String name = editTextName.getText().toString().trim();
+                        String age = editTextAge.getText().toString().trim();
+                        String phoneNumber = editTextPhoneNumber.getText().toString().trim();
+                        String email = editTextEmail.getText().toString().trim();
+
+                        // Cập nhật thông tin người dùng trên Firebase (sử dụng các phương thức tương ứng)
+                        updateUserInfo(name, age, phoneNumber, email);
+
+                        // Đóng dialog
+                        dialog[0].dismiss();
+                    }
+                });
+
+                // Xử lý sự kiện click vào nút "Hủy"
+                buttonCancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // Đóng dialog
+                        dialog[0].dismiss();
+                    }
+                });
+
+                // Hiển thị dialog
+                dialog[0].show();
+            }
+        });
 
         // Search Button
         searchButton.setOnClickListener(new View.OnClickListener() {
@@ -95,6 +163,30 @@ public class FragmentSearch extends Fragment implements KhoaHocAdapter.ListItemL
             isDefaultAvatar = true;
         }
     }
+
+    private void updateUserInfo(String name, String age, String phoneNumber, String email) {
+        // Thực hiện cập nhật thông tin người dùng trên Firebase (sử dụng các phương thức tương ứng)
+        // Ví dụ:
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                .setDisplayName(name)
+                .build();
+
+        user.updateProfile(profileUpdates)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(requireContext(), "Cập nhật thông tin thành công", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(requireContext(), "Cập nhật thông tin thất bại", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
+
+
 
     @Override
     public void onItemClicked(View v, int position) {

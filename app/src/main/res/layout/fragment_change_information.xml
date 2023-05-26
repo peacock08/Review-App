@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- Trường nhập tên -->
+        <EditText
+            android:id="@+id/editTextName1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Tên"
+            android:inputType="textPersonName" />
+
+        <!-- Trường nhập tuổi -->
+        <EditText
+            android:id="@+id/editTextAge1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Tuổi"
+            android:inputType="number" />
+
+        <!-- Trường nhập số điện thoại -->
+        <EditText
+            android:id="@+id/editTextPhoneNumber1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Số điện thoại"
+            android:inputType="phone" />
+
+        <!-- Trường nhập email -->
+        <EditText
+            android:id="@+id/editTextEmail1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:editable="false"
+            android:inputType="textEmailAddress" />
+
+        <!-- Nút Sửa -->
+        <Button
+            android:id="@+id/buttonUpdate1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sửa" />
+
+        <!-- Nút Hủy -->
+        <Button
+            android:id="@+id/buttonCancel1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hủy" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
