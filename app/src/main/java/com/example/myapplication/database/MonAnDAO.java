@@ -8,18 +8,18 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-import com.example.myapplication.models.ChuyenNganh;
-import com.example.myapplication.models.KhoaHoc;
+import com.example.myapplication.models.Loai;
+import com.example.myapplication.models.MonAn;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class KhoaHocDAO extends SQLiteOpenHelper {
+public class MonAnDAO extends SQLiteOpenHelper {
     private final static String DATABASE_NAME = "CoVanAnhXinhGai.db";
     private final static int DATABSE_VERSION = 1;
     private final static String TABLE_NAME = "khoa_hoc";
 
-    public KhoaHocDAO(@Nullable Context context) {
+    public MonAnDAO(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABSE_VERSION);
     }
 
@@ -36,31 +36,31 @@ public class KhoaHocDAO extends SQLiteOpenHelper {
 
     }
 
-    public void insert(KhoaHoc khoaHoc) {
+    public void insert(MonAn monAn) {
         String sql = "INSERT INTO " + TABLE_NAME
                 + "(ten, chuyenNganh, ngayBatDau, hocPhi, kichHoat) "
                 + "VALUES(?, ?, ?, ?, ?)";
         String[] args = {
-                khoaHoc.getTen(),
-                khoaHoc.getChuyenNganh().name(),
-                khoaHoc.getNgayBatDau(),
-                khoaHoc.getHocPhi(),
-                Integer.toString(khoaHoc.getKichHoat()),
+                monAn.getTen(),
+                monAn.getChuyenNganh().name(),
+                monAn.getNgayBatDau(),
+                monAn.getHocPhi(),
+                Integer.toString(monAn.getKichHoat()),
         };
 
         SQLiteDatabase st = getWritableDatabase();
         st.execSQL(sql, args);
     }
 
-    public List<KhoaHoc> serializeResult(Cursor cursor) {
-        List<KhoaHoc> khoaHocList = new ArrayList<>();
+    public List<MonAn> serializeResult(Cursor cursor) {
+        List<MonAn> monAnList = new ArrayList<>();
 
         while (cursor != null && cursor.moveToNext()) {
-            khoaHocList.add(
-                    new KhoaHoc(
+            monAnList.add(
+                    new MonAn(
                             cursor.getInt(0),
                             cursor.getString(1),
-                            ChuyenNganh.valueOf(cursor.getString(2)),
+                            Loai.valueOf(cursor.getString(2)),
                             cursor.getString(3),
                             cursor.getString(4),
                             cursor.getInt(5)
@@ -69,10 +69,10 @@ public class KhoaHocDAO extends SQLiteOpenHelper {
         }
 
         cursor.close();
-        return khoaHocList;
+        return monAnList;
     }
 
-    public List<KhoaHoc> getAll() {
+    public List<MonAn> getAll() {
         String sql = "SELECT * FROM " + TABLE_NAME;
 
         SQLiteDatabase db = getReadableDatabase();
@@ -81,16 +81,16 @@ public class KhoaHocDAO extends SQLiteOpenHelper {
         return this.serializeResult(cursor);
     }
 
-    public int update(KhoaHoc khoaHoc) {
+    public int update(MonAn monAn) {
         ContentValues values = new ContentValues();
-        values.put("ten", khoaHoc.getTen());
-        values.put("chuyenNganh", khoaHoc.getChuyenNganh().name());
-        values.put("ngayBatDau", khoaHoc.getNgayBatDau());
-        values.put("hocPhi", khoaHoc.getHocPhi());
-        values.put("kichHoat", String.valueOf(khoaHoc.getKichHoat()));
+        values.put("ten", monAn.getTen());
+        values.put("chuyenNganh", monAn.getChuyenNganh().name());
+        values.put("ngayBatDau", monAn.getNgayBatDau());
+        values.put("hocPhi", monAn.getHocPhi());
+        values.put("kichHoat", String.valueOf(monAn.getKichHoat()));
 
         String where = "id = ?";
-        String[] whereAgrs = {Integer.toString(khoaHoc.getMa())};
+        String[] whereAgrs = {Integer.toString(monAn.getMa())};
 
         SQLiteDatabase db = getWritableDatabase();
         return db.update(TABLE_NAME, values, where, whereAgrs);
@@ -104,7 +104,7 @@ public class KhoaHocDAO extends SQLiteOpenHelper {
         return db.delete(TABLE_NAME, where, whereArgs);
     }
 
-    public List<KhoaHoc> search(String keyword, int kichHoat) {
+    public List<MonAn> search(String keyword, int kichHoat) {
         String sql = "select * from " + TABLE_NAME
                 + " where ten LIKE ? AND kichHoat = ?";
         String keywordLike = "%" + keyword + "%";

@@ -16,9 +16,9 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.myapplication.database.KhoaHocDAO;
-import com.example.myapplication.models.ChuyenNganh;
-import com.example.myapplication.models.KhoaHoc;
+import com.example.myapplication.database.MonAnDAO;
+import com.example.myapplication.models.Loai;
+import com.example.myapplication.models.MonAn;
 
 import java.util.Calendar;
 
@@ -44,11 +44,11 @@ public class AddActivity extends AppCompatActivity {
         chuyenNganhGroup = findViewById(R.id.add_chuyenNganh_group);
         congTacCheckBox = findViewById(R.id.add_kichHoat);
 
-        ChuyenNganh[] chuyenNganhs = ChuyenNganh.values();
-        for (int i = 0; i < chuyenNganhs.length; i++) {
-            System.out.println(chuyenNganhs[i].name());
+        Loai[] loais = Loai.values();
+        for (int i = 0; i < loais.length; i++) {
+            System.out.println(loais[i].name());
             RadioButton radioButton = new RadioButton(this);
-            radioButton.setText(chuyenNganhs[i].getDescription());
+            radioButton.setText(loais[i].getDescription());
             radioButton.setId(i);
             if (i == 0) {
                 radioButton.setChecked(true);
@@ -57,7 +57,7 @@ public class AddActivity extends AppCompatActivity {
             chuyenNganhGroup.addView(radioButton);
         }
 
-        KhoaHocDAO db = new KhoaHocDAO(this);
+        MonAnDAO db = new MonAnDAO(this);
 
         //Date Button
         dateButton.setOnClickListener(new View.OnClickListener() {
@@ -105,11 +105,11 @@ public class AddActivity extends AppCompatActivity {
                 boolean congtac = congTacCheckBox.isChecked();
                 String chuyenNganhTxt = ((RadioButton) chuyenNganhGroup.findViewById(chuyenNganhGroup.getCheckedRadioButtonId())).getText()
                         .toString();
-                ChuyenNganh chuyenNganh = null;
-                ChuyenNganh[] chuyenNganhs1 = ChuyenNganh.values();
-                for (ChuyenNganh cn : chuyenNganhs1) {
+                Loai loai = null;
+                Loai[] chuyenNganhs1 = Loai.values();
+                for (Loai cn : chuyenNganhs1) {
                     if (cn.getDescription().equalsIgnoreCase(chuyenNganhTxt)) {
-                        chuyenNganh = cn;
+                        loai = cn;
                     }
                 }
 
@@ -121,8 +121,8 @@ public class AddActivity extends AppCompatActivity {
                             Toast.LENGTH_SHORT
                     ).show();
                 } else {
-                    KhoaHoc khoaHoc = new KhoaHoc(ten, chuyenNganh, ngay, hocPhi, congtac ? 1 : 0);
-                    db.insert(khoaHoc);
+                    MonAn monAn = new MonAn(ten, loai, ngay, hocPhi, congtac ? 1 : 0);
+                    db.insert(monAn);
                     finish();
                 }
 

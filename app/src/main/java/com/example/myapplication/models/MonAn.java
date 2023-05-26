@@ -2,36 +2,36 @@ package com.example.myapplication.models;
 
 import java.io.Serializable;
 
-public class KhoaHoc implements Serializable {
+public class MonAn implements Serializable {
     private int ma;
-    private ChuyenNganh chuyenNganh;
+    private Loai loai;
     private String ten, ngayBatDau, hocPhi;
     private int kichHoat;
 
-    public KhoaHoc(
+    public MonAn(
             int ma,
             String ten,
-            ChuyenNganh chuyenNganh,
+            Loai loai,
             String ngayBatDau,
             String hocPhi,
             int kichHoat
     ) {
         this.ma = ma;
-        this.chuyenNganh = chuyenNganh;
+        this.loai = loai;
         this.ten = ten;
         this.ngayBatDau = ngayBatDau;
         this.hocPhi = hocPhi;
         this.kichHoat = kichHoat;
     }
 
-    public KhoaHoc(
+    public MonAn(
             String ten,
-            ChuyenNganh chuyenNganh,
+            Loai loai,
             String ngayBatDau,
             String hocPhi,
             int kichHoat
     ) {
-        this.chuyenNganh = chuyenNganh;
+        this.loai = loai;
         this.ten = ten;
         this.ngayBatDau = ngayBatDau;
         this.hocPhi = hocPhi;
@@ -46,12 +46,12 @@ public class KhoaHoc implements Serializable {
         this.ma = ma;
     }
 
-    public ChuyenNganh getChuyenNganh() {
-        return chuyenNganh;
+    public Loai getChuyenNganh() {
+        return loai;
     }
 
-    public void setChuyenNganh(ChuyenNganh chuyenNganh) {
-        this.chuyenNganh = chuyenNganh;
+    public void setChuyenNganh(Loai loai) {
+        this.loai = loai;
     }
 
     public String getTen() {

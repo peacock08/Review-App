@@ -19,8 +19,8 @@ import com.example.myapplication.R;
 import com.example.myapplication.UpdateActivity;
 import com.example.myapplication.adapter.KhoaHocAdapter;
 import com.example.myapplication.api.WeatherAPI;
-import com.example.myapplication.database.KhoaHocDAO;
-import com.example.myapplication.models.KhoaHoc;
+import com.example.myapplication.database.MonAnDAO;
+import com.example.myapplication.models.MonAn;
 import com.example.myapplication.models.WeatherInfo;
 import com.example.myapplication.models.WeatherResponse;
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,9 +35,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class FragmentList extends Fragment implements KhoaHocAdapter.ListItemListener {
     ListView listView;
-    KhoaHocDAO db;
+    MonAnDAO db;
     KhoaHocAdapter adapter;
-    List<KhoaHoc> khoaHocs;
+    List<MonAn> monAns;
     ImageButton logOutButton;
     private static final String API_KEY = "YOUR_API_KEY";
     @SuppressLint("MissingInflatedId")
@@ -47,10 +47,10 @@ public class FragmentList extends Fragment implements KhoaHocAdapter.ListItemLis
         View v = inflater.inflate(R.layout.fragment_list, container, false);
         listView = v.findViewById(R.id.list_listItem);
         logOutButton = v.findViewById(R.id.logOutButton);
-        db = new KhoaHocDAO(getContext());
+        db = new MonAnDAO(getContext());
 
-        khoaHocs = db.getAll();
-        adapter = new KhoaHocAdapter(getContext(), khoaHocs);
+        monAns = db.getAll();
+        adapter = new KhoaHocAdapter(getContext(), monAns);
         adapter.setListItemListener(this);
         listView.setAdapter(adapter);
 
@@ -75,7 +75,7 @@ public class FragmentList extends Fragment implements KhoaHocAdapter.ListItemLis
         WeatherAPI weatherAPI = retrofit.create(WeatherAPI.class);
         TextView temperatureTextView = v.findViewById(R.id.temperatureTextView);
         // Gửi yêu cầu để lấy thông tin thời tiết cho thành phố mong muốn (ví dụ Hanoi)
-        Call<WeatherResponse> call = weatherAPI.getWeather("Hoàn Kiếm, Hà Nội", API_KEY);
+        Call<WeatherResponse> call = weatherAPI.getWeather("Hà Nội", API_KEY);
         call.enqueue(new Callback<WeatherResponse>() {
             @Override
             public void onResponse(Call<WeatherResponse> call, Response<WeatherResponse> response) {
@@ -107,16 +107,16 @@ public class FragmentList extends Fragment implements KhoaHocAdapter.ListItemLis
     @Override
     public void onItemClicked(View v, int position) {
         Intent intent = new Intent(getContext(), UpdateActivity.class);
-        KhoaHoc khoaHoc = khoaHocs.get(position);
-        intent.putExtra("item", khoaHoc);
+        MonAn monAn = monAns.get(position);
+        intent.putExtra("item", monAn);
         startActivity(intent);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        khoaHocs.clear();
-        khoaHocs.addAll(db.getAll());
+        monAns.clear();
+        monAns.addAll(db.getAll());
         adapter.notifyDataSetChanged();
     }
 

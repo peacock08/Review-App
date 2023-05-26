@@ -85,7 +85,7 @@ public class FragmentInfo extends Fragment {
         titles.add("Review quán cơm 10 Khó");
         titles.add("Top món ăn ngon ở Tây Ninh");
         titles.add("Món ăn hà Nội vừa rẻ lại vừa bổ dưỡng");
-        titles.add("Top 20 quán ăn ngon ở Thái Bình");
+        titles.add("Top 20 quán ăn ngon ở Nam Định");
         return titles;
     }
 

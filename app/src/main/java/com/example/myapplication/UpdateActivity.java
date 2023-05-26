@@ -17,9 +17,9 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.myapplication.database.KhoaHocDAO;
-import com.example.myapplication.models.ChuyenNganh;
-import com.example.myapplication.models.KhoaHoc;
+import com.example.myapplication.database.MonAnDAO;
+import com.example.myapplication.models.Loai;
+import com.example.myapplication.models.MonAn;
 
 import java.util.Calendar;
 
@@ -49,26 +49,26 @@ public class UpdateActivity extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        KhoaHoc khoaHoc = (KhoaHoc) intent.getSerializableExtra("item");
+        MonAn monAn = (MonAn) intent.getSerializableExtra("item");
 
-        ChuyenNganh[] chuyenNganhs = ChuyenNganh.values();
-        for (int i = 0; i < chuyenNganhs.length; i++) {
+        Loai[] loais = Loai.values();
+        for (int i = 0; i < loais.length; i++) {
             RadioButton radioButton = new RadioButton(this);
-            radioButton.setText(chuyenNganhs[i].getDescription());
+            radioButton.setText(loais[i].getDescription());
             radioButton.setId(i);
-            radioButton.setChecked(khoaHoc.getChuyenNganh()
+            radioButton.setChecked(monAn.getChuyenNganh()
                     .getDescription()
-                    .equalsIgnoreCase(chuyenNganhs[i].getDescription()));
+                    .equalsIgnoreCase(loais[i].getDescription()));
 
             chuyenNganhGroup.addView(radioButton);
         }
 
-        tenView.setText(khoaHoc.getTen());
-        hocPhiView.setText(khoaHoc.getHocPhi());
-        ngayBatDauView.setText(khoaHoc.getNgayBatDau());
-        kichHoatBox.setChecked(khoaHoc.getKichHoat() == 1);
+        tenView.setText(monAn.getTen());
+        hocPhiView.setText(monAn.getHocPhi());
+        ngayBatDauView.setText(monAn.getNgayBatDau());
+        kichHoatBox.setChecked(monAn.getKichHoat() == 1);
 
-        KhoaHocDAO db = new KhoaHocDAO(this);
+        MonAnDAO db = new MonAnDAO(this);
 
         // Date Button
         dateButton.setOnClickListener(new View.OnClickListener() {
@@ -110,7 +110,7 @@ public class UpdateActivity extends AppCompatActivity {
         removeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                db.delete(khoaHoc.getMa());
+                db.delete(monAn.getMa());
                 finish();
             }
         });
@@ -125,11 +125,11 @@ public class UpdateActivity extends AppCompatActivity {
                 boolean kichHoat = kichHoatBox.isChecked();
                 String chuyenNganhTxt = ((RadioButton) chuyenNganhGroup.findViewById(chuyenNganhGroup.getCheckedRadioButtonId())).getText()
                         .toString();
-                ChuyenNganh chuyenNganh = null;
-                ChuyenNganh[] chuyenNganhs1 = ChuyenNganh.values();
-                for (ChuyenNganh cn : chuyenNganhs1) {
+                Loai loai = null;
+                Loai[] chuyenNganhs1 = Loai.values();
+                for (Loai cn : chuyenNganhs1) {
                     if (cn.getDescription().equalsIgnoreCase(chuyenNganhTxt)) {
-                        chuyenNganh = cn;
+                        loai = cn;
                     }
                 }
 
@@ -140,12 +140,12 @@ public class UpdateActivity extends AppCompatActivity {
                             Toast.LENGTH_SHORT
                     ).show();
                 } else {
-                    khoaHoc.setTen(ten);
-                    khoaHoc.setChuyenNganh(chuyenNganh);
-                    khoaHoc.setNgayBatDau(ngay);
-                    khoaHoc.setHocPhi(hocPhi);
-                    khoaHoc.setKichHoat(kichHoat ? 1 : 0);
-                    db.update(khoaHoc);
+                    monAn.setTen(ten);
+                    monAn.setChuyenNganh(loai);
+                    monAn.setNgayBatDau(ngay);
+                    monAn.setHocPhi(hocPhi);
+                    monAn.setKichHoat(kichHoat ? 1 : 0);
+                    db.update(monAn);
 
                     finish();
                 }

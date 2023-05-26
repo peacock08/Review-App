@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Spinner;
@@ -18,8 +19,8 @@ import androidx.fragment.app.Fragment;
 import com.example.myapplication.R;
 import com.example.myapplication.UpdateActivity;
 import com.example.myapplication.adapter.KhoaHocAdapter;
-import com.example.myapplication.database.KhoaHocDAO;
-import com.example.myapplication.models.KhoaHoc;
+import com.example.myapplication.database.MonAnDAO;
+import com.example.myapplication.models.MonAn;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,9 +30,12 @@ public class FragmentSearch extends Fragment implements KhoaHocAdapter.ListItemL
     Spinner spinner;
     Button searchButton;
     ListView listView;
-    List<KhoaHoc> khoaHocs = new ArrayList<>();
-    KhoaHocDAO db;
+    List<MonAn> monAns = new ArrayList<>();
+    MonAnDAO db;
     KhoaHocAdapter adapter;
+    private ImageView avatarImageView;
+    private Button changeAvatarButton;
+    private boolean isDefaultAvatar = true;
     @SuppressLint("MissingInflatedId")
     @Nullable
     @Override
@@ -46,11 +50,23 @@ public class FragmentSearch extends Fragment implements KhoaHocAdapter.ListItemL
         searchView = v.findViewById(R.id.search_searchView);
         listView = v.findViewById(R.id.search_listItem);
 
-        db = new KhoaHocDAO(getContext());
-        adapter = new KhoaHocAdapter(getContext(), khoaHocs);
+        db = new MonAnDAO(getContext());
+        adapter = new KhoaHocAdapter(getContext(), monAns);
         adapter.setListItemListener(this);
         listView.setAdapter(adapter);
 
+        // Ánh xạ view từ layout
+        avatarImageView = v.findViewById(R.id.avatarImageView);
+        changeAvatarButton = v.findViewById(R.id.changeAvatarButton);
+
+        // Thiết lập sự kiện click cho nút Change Avatar
+        changeAvatarButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Gọi phương thức để thay đổi hình ảnh của avatar
+                changeAvatar();
+            }
+        });
 
         // Search Button
         searchButton.setOnClickListener(new View.OnClickListener() {
@@ -59,8 +75,8 @@ public class FragmentSearch extends Fragment implements KhoaHocAdapter.ListItemL
                 String key = String.valueOf(searchView.getQuery());
                 int index = (int) spinner.getSelectedItemId();
 
-                khoaHocs.clear();
-                khoaHocs.addAll(db.search(key, index));
+                monAns.clear();
+                monAns.addAll(db.search(key, index));
                 adapter.notifyDataSetChanged();
             }
         });
@@ -68,11 +84,23 @@ public class FragmentSearch extends Fragment implements KhoaHocAdapter.ListItemL
         return v;
     }
 
+    private void changeAvatar() {
+        if (isDefaultAvatar) {
+            // Đổi hình ảnh thành ảnh có địa chỉ drawable/girl
+            avatarImageView.setImageResource(R.drawable.girl);
+            isDefaultAvatar = false;
+        } else {
+            // Đổi hình ảnh về ảnh ban đầu (ví dụ: drawable/avatar)
+            avatarImageView.setImageResource(R.drawable.nam);
+            isDefaultAvatar = true;
+        }
+    }
+
     @Override
     public void onItemClicked(View v, int position) {
         Intent intent = new Intent(getContext(), UpdateActivity.class);
-        KhoaHoc khoaHoc = khoaHocs.get(position);
-        intent.putExtra("item", khoaHoc);
+        MonAn monAn = monAns.get(position);
+        intent.putExtra("item", monAn);
         startActivity(intent);
     }
 
@@ -80,7 +108,7 @@ public class FragmentSearch extends Fragment implements KhoaHocAdapter.ListItemL
     @Override
     public void onResume() {
         super.onResume();
-        khoaHocs.clear();
+        monAns.clear();
         adapter.notifyDataSetChanged();
     }
 }

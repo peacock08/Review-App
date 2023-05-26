@@ -11,20 +11,20 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.myapplication.R;
-import com.example.myapplication.models.KhoaHoc;
+import com.example.myapplication.models.MonAn;
 
 
 import java.util.List;
 
 public class KhoaHocAdapter extends ArrayAdapter {
     Context context;
-    List<KhoaHoc> khoaHocList;
+    List<MonAn> monAnList;
     private ListItemListener listItemListener;
     public KhoaHocAdapter(@NonNull Context context, @NonNull List list) {
         super(context, R.layout.item, list);
 
         this.context = context;
-        this.khoaHocList = list;
+        this.monAnList = list;
     }
 
     public void setListItemListener(ListItemListener listItemListener) {
@@ -42,12 +42,12 @@ public class KhoaHocAdapter extends ArrayAdapter {
         TextView hocPhiView = v.findViewById(R.id.item_hocPhi);
         TextView kichHoatBox = v.findViewById(R.id.item_kichHoat);
 
-        KhoaHoc khoaHoc = khoaHocList.get(position);
-        tenView.setText(khoaHoc.getTen());
-        chuyenNganh.setText(khoaHoc.getChuyenNganh().getDescription());
-        ngayBatDauView.setText(khoaHoc.getNgayBatDau());
-        hocPhiView.setText(khoaHoc.getHocPhi());
-        kichHoatBox.setText(khoaHoc.getKichHoat() == 1 ? "Đã review" : "Chưa review");
+        MonAn monAn = monAnList.get(position);
+        tenView.setText(monAn.getTen());
+        chuyenNganh.setText(monAn.getChuyenNganh().getDescription());
+        ngayBatDauView.setText(monAn.getNgayBatDau());
+        hocPhiView.setText(monAn.getHocPhi());
+        kichHoatBox.setText(monAn.getKichHoat() == 1 ? "Đã review" : "Chưa review");
 
         v.setOnClickListener(new View.OnClickListener() {
             @Override

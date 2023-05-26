@@ -12,7 +12,7 @@
         />
     <item
         android:id="@+id/mTimKiem"
-        android:title="Tìm Kiếm"
+        android:title="Cá nhân"
         android:icon="@drawable/ic_search"
         />
 </menu>

@@ -1,7 +1,7 @@
 
 package com.example.myapplication.models;
 
-public enum ChuyenNganh {
+public enum Loai {
     CNTT("Đồ ăn Hàn Quốc"),
     KT("Đồ ăn Việt Nam"),
     TKDH("Đồ ăn Thái Lan"),
@@ -9,7 +9,7 @@ public enum ChuyenNganh {
 
     private String description;
 
-    ChuyenNganh(String description) {
+    Loai(String description) {
         this.description = description;
     }
 
